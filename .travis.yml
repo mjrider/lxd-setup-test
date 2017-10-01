@@ -1,0 +1,30 @@
+---
+sudo: true
+dist: trusty
+
+env:
+  - LXD_ADDR=localhost \
+   LXD_PORT=8443 \
+   LXD_GENERATE_CLIENT_CERTS=true \
+   LXD_ACCEPT_SERVER_CERTIFICATE=true \
+   LXD_SCHEME=https \
+   LXD_PASSWORD=the-password 
+
+before_install:
+  - sudo add-apt-repository -y ppa:ubuntu-lxc/lxd-stable
+  - sudo apt-get -qq update
+  - sudo apt-get -qq -y dist-update
+  - sudo apt-get install -y lxd
+  - sudo lxd init --auto --trust-password="${LXD_PASSWORD}" --network-port=8443 --network-address='[::]'
+  - sudo chmod 777 /var/lib/lxd/unix.socket
+  - lxc image list
+
+script:
+   - lxc storage create foobar dir source=/tmp/foobar
+   - lxc storage delete foobar
+
+after_script:
+   - cat /proc/mounts
+   - lxc storage list --verbose -- debug
+   - lxc storage show foobar --verbose --debug || /bin/true
+
