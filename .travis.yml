@@ -14,8 +14,7 @@ before_install:
   - sudo apt-get --yes install snapd
   - sudo apt-get -qq update
   - sudo snap install lxd
-  - ps axf
-  - sudo lxd daemon --group=travis
+  - sleep 10
   - sudo lxd init --auto --trust-password="${LXD_PASSWORD}" --network-port=8443 --network-address='[::]'
   - sudo chmod 777 /var/lib/lxd/unix.socket
   - lxc image list
