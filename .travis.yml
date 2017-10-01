@@ -28,4 +28,5 @@ after_script:
    - lxc storage show foobar --verbose --debug || /bin/true
    - sudo find /var/lib/lxd/storage-pools/foobar 
    - sudo umount /var/lib/lxd/storage-pools/foobar
+   - cat /proc/mounts
 
