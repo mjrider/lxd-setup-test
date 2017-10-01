@@ -16,7 +16,7 @@ before_install:
   - sudo snap install lxd
   - sleep 10
   - sudo lxd init --auto --trust-password="${LXD_PASSWORD}" --network-port=8443 --network-address='[::]'
-  - sudo chmod 777 /var/lib/lxd/unix.socket
+  - sudo chmod 777 /var/snap/lxd/common/lxd/unix.socket
   - lxc image list
 
 script:
