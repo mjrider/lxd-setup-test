@@ -11,6 +11,7 @@ env:
    LXD_PASSWORD=the-password 
 
 before_install:
+  - export PATH=/snap/bin/:${PATH}
   - sudo apt-get --yes install snapd
   - sudo apt-get -qq update
   - sudo snap install lxd
