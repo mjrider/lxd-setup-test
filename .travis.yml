@@ -11,8 +11,9 @@ env:
    LXD_PASSWORD=the-password 
 
 before_install:
+  - sudo apt-get --yes install snapd
   - sudo apt-get -qq update
-  - sudo apt-get install -y lxd
+  - sudo snap install lxd
   - sudo lxd init --auto --trust-password="${LXD_PASSWORD}" --network-port=8443 --network-address='[::]'
   - sudo chmod 777 /var/lib/lxd/unix.socket
   - lxc image list
